@@ -1,1 +1,2 @@
-# Boot_loader_32bit_Kernel
+# Boot_loader_for_32bit_Kernel
+
