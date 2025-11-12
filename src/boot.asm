@@ -13,9 +13,19 @@ start:
     sti             ;Enable the interrupts which were disabled
 
 print:
-    lodsb           ;Load the byte as DS:SI into AL register and increment SI
+    lodsb         ; Load byte at DS:SI into AL register and increment SI
+    cmp al, 0     ; Compare the value in AL with 0 (null terminator)
+    je done       ; Jump to 'done' label if zero (end of string)
+    mov ah, 0x0E  ; Set AH register to 0x0E (BIOS teletype output function)
+    int 0x10      ; Call BIOS interrupt 0x10 for teletype output
+    jmp print     ; Jump back to 'print' label to process next character
 
 done:
     cli
     hlt
 
+msg: db 'Hello World!', 0 ; Define the message 'Hello World!' followed by a null terminator
+
+times 510 - ($ - $$) db 0 ; Fill the rest of the boot sector with zeros up to 510 bytes
+
+dw 0xAA55        ; Boot sector signature, required to make the disk bootable
