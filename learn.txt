@@ -1,0 +1,16 @@
+## Boot loader
+
+## Boot sequence : 
+
+1. Real Mode : All the x86 cpu (Intel and AMD) starts in Real mode, a compatibility mode that emulates the original 8086
+    - CPU behaves like a 16bit cpu
+    - Only 1 MB of data is addressable
+    - NO protection
+    - Segment:offset addressing
+    - Reason : Backward compatibility
+    - Eventually the cpu is moved to other modes where it can access more memory
+
+
+2. Protected Mode : Once the bootloader gets loaded the control moves from real mode to protected mode
+
+3. Long Mode :
